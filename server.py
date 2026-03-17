@@ -11,15 +11,18 @@ def emotion_detector_endpoint():
         if 'anger' in response and 'disgust' in response and \
            'fear' in response and 'joy' in response and \
            'sadness' in response and 'dominant_emotion' in response:
-           return ("For the given statement, the system response is "
-                   "'anger': "   + str(response['anger'])   + ", "
-                   "'disgust': " + str(response['disgust']) + ", "
-                   "'fear': "    + str(response['fear'])    + ", "
-                   "'joy': "     + str(response['joy'])     + ", and "
-                   "'sadness': " + str(response['sadness']) + ". "
-                   "The dominant emotion is "
-                   "<b>" + response['dominant_emotion'] + "</b>.")
-    pass
+            if response['dominant_emotion'] is None:
+                return "<b>Invalid text! Please try again!</b>"
+
+            return ("For the given statement, the system response is "
+                    "'anger': "   + str(response['anger'])   + ", "
+                    "'disgust': " + str(response['disgust']) + ", "
+                    "'fear': "    + str(response['fear'])    + ", "
+                    "'joy': "     + str(response['joy'])     + ", and "
+                    "'sadness': " + str(response['sadness']) + ". "
+                    "The dominant emotion is "
+                    "<b>" + response['dominant_emotion'] + "</b>.")
+    return "<b>Some error occured! Please try again!</b>"
 
 @app.route("/")
 def render_index_page():

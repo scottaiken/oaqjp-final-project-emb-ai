@@ -24,5 +24,12 @@ def emotion_detector(text_to_analyze):
                             dominant_emo = k
                     res_dict['dominant_emotion'] = dominant_emo
                 # print(f"{res_dict}")
+    elif response.status_code == 400:
+        res_dict['anger'] = None
+        res_dict['fear'] = None
+        res_dict['joy'] = None
+        res_dict['sadness'] = None
+        res_dict['disgust'] = None
+        res_dict['dominant_emotion'] = None
     return res_dict
     
